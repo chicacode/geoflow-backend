@@ -33,7 +33,7 @@
 
 ## Backend development process
 
-![alt text](..src/public/endpoint1.png "image")
+![alt text](./src/public/endpoint1.png "image")
 <!-- ![alt text](./frontend/public/assets/endpoint2.png "image")
 ![alt text](./frontend/public/assets/create-account.png "image") -->
 
