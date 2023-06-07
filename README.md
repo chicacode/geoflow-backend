@@ -33,9 +33,9 @@
 
 ## Backend development process
 
-![alt text](./frontend/public/assets/endpoint1.png "image")
-![alt text](./frontend/public/assets/endpoint2.png "image")
-![alt text](./frontend/public/assets/create-account.png "image")
+![alt text](..src/public/endpoint1.png "image")
+<!-- ![alt text](./frontend/public/assets/endpoint2.png "image")
+![alt text](./frontend/public/assets/create-account.png "image") -->
 
 ### Developed by: 
 - Geri
