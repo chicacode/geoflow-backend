@@ -17,8 +17,8 @@ const register = async (req, res) => {
     // create new object type user
     const user = new User(req.body);
     user.token = generateId();
-    const userSaved = await user.save();
-    res.json(userSaved);
+    await user.save();
+    res.json({msg: "User created correctly"});
   } catch (error) {
     console.log(error);
   }

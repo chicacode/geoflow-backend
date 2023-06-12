@@ -23,6 +23,7 @@
 - bcrypt
 - dotenv
 - jsonwebtoken
+- cors
 
 ## Technologies used Frotend
 
