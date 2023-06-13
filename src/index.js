@@ -13,18 +13,19 @@ connectDB();
 
 //Setup cors
 const whitelist = [process.env.FRONTEND_URL];
-
+console.log("whitelist", whitelist)
 const corsOptions = {
   origin: function (origin, callback) {
+    console.log(whitelist.includes(origin))
     if (whitelist.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error("Not allowed by CORS"));
+      callback(new Error("Not allowed byy CORS"));
     }
   },
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 //Routing
 app.use("/api/users", userRoutes);
 app.use("/api/projects", projectRoutes);

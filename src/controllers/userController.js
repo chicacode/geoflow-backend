@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import generateId from "../helpers/generateId.js";
 import generateJWT from "../helpers/generateJWT.js";
+import { emailRegister, emailRecoverPassword } from "../helpers/email.js";
 
 const register = async (req, res) => {
   // Avoid duplicated registers
@@ -18,6 +19,13 @@ const register = async (req, res) => {
     const user = new User(req.body);
     user.token = generateId();
     await user.save();
+
+    // Send confirmation email
+    emailRegister({
+      email: user.email,
+      name: user.name,
+      token: user.token
+    })
     res.json({msg: "User created correctly! Check your email to activate your account."});
   } catch (error) {
     console.log(error);
@@ -89,6 +97,13 @@ const recoverPassword = async (req, res) => {
     user.token = generateId();
     await user.save();
 
+    // Send email
+
+    emailRecoverPassword({
+      email: user.email,
+      name: user.name,
+      token: user.token
+    })
     res.json({ msg: "We have sent an email with instructions" });
   } catch (error) {
     console.log(error);
@@ -96,8 +111,8 @@ const recoverPassword = async (req, res) => {
 };
 
 const checkToken = async (req, res) => {
-  const { token } = req.body;
-
+  const { token } = req.params;
+ 
   const validToken = await User.findOne({ token });
 
   if (validToken) {
