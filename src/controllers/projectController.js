@@ -130,6 +130,7 @@ const addCollaborator = async (req, res) => {
     return res.status(404).json({ msg: error.message });
   }
 
+  // avoid duplication
   if (project.colaborators.includes(user._id)) {
     const error = new Error("User is alredy in the project as collaborator");
     return res.status(404).json({ msg: error.message });
@@ -154,7 +155,24 @@ const findCollaborator = async (req, res) => {
   res.json(user);
 };
 
-const deleteCollaborator = async (req, res) => {};
+const deleteCollaborator = async (req, res) => {
+  const project = await Project.findById(req.params.id);
+
+  if (!project) {
+    const error = new Error("Project Not Found");
+    return res.status(404).json({ msg: error.message });
+  }
+
+  if (project.creator.toString() !== req.user._id.toString()) {
+    const error = new Error("Invalid Action");
+    return res.status(401).json({ msg: error.message });
+  }
+
+  project.colaborators.pull(req.body.id);
+  await project.save()
+  res.json({msg: "Collaborator deleted correctly"})
+
+};
 
 export {
   getProjects,
