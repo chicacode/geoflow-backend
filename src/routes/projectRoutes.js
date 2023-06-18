@@ -26,6 +26,6 @@ router
 
 router.post("/collaborators", checkAuth, findCollaborator);
 router.post("/collaborators/:id", checkAuth, addCollaborator);
-router.delete("/collaborator/:id", checkAuth, deleteCollaborator);
+router.post("/delete-collaborator/:id", checkAuth, deleteCollaborator);
 
 export default router;
