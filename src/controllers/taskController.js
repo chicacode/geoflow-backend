@@ -91,6 +91,7 @@ const deleteTask = async (req, res) => {
 
     try{
         const project = await Project.findById(task.project);
+        // Delete task and teask reference in DB
         project.tasks.pull(task._id);
         await Promise.allSettled([await project.save(), await task.deleteOne()]);
         res.json({ msg: "Task Deleted" });
